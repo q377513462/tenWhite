@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            background: #f0f8fb;
+        }
+        #state{
+            width:150px;
+            height:400px;
+            position:absolute;
+            left:35%;
+            top:50%;
+            margin-left:-75px;
+            margin-top:-200px;
+        }
+        #state p{
+            font-family: Arial;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+            color: #0d96c6;
+        }
+        #state #count{
+            height: 300px;
+            width: 150px;
+            position: relative;
+            left: 0%;
+            top: 50px;
+            border: 1px solid #0CF;
+            border-radius: 0 0 20px 20px;
+            border-top: none;
+            overflow: hidden;
+        }
+        #value {
+            height: 0;
+            width: 150px;
+            background: #6CF;
+            position: absolute;
+            bottom: 0;
+            border-radius: 0 0 20px 20px;
+        }
+        #state input{
+            font-size: 30px;
+            font-weight: bold;
+            color: #09C;
+            border: 1px solid #0CC;
+            text-shadow: 1px 1px 1px #3FF;
+            position: absolute;
+            top: 420px;
+            background: none;
+            cursor: pointer;
+        }
+        #state #easy{
+            left:5px;
+        }
+        #state #hand{
+            left:85px;
+        }
+        #bg{
+            height: 600px;
+            width: 600px;
+            position: absolute;
+            left:57%;
+            top:50%;
+            margin-left:-300px;
+            margin-top:-300px;
+            overflow: hidden;
+            background: #b8e4f8;
+            box-shadow: 0px 0px 20px #37c6f5;
+        }
+        #bg div{
+            height: 80px;
+            width: 80px;
+            float: left;
+            border-right: none;
+            border-top: none;
+            border-radius: 20px;
+            background: #b8e2f6;
+            border: 10px solid #c8e7f6;
+            box-shadow: -2px -2px 5px #37c6f5;
+        }
+        #bg img{
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        #mask {
+            height: 100%;
+            width: 100%;
+            background: rgb(180, 200, 220);
+            position: absolute;
+            display: none;
+            opacity: 0.6;
+        }
+        #level {
+            height:200px;
+            width:400px;
+            position:absolute;
+            left:40%;
+            background:rgba(89, 181, 234, 0.8);
+            top:200px;
+            padding:40px 0 50px 0;
+            display:none;
+            border-radius:20px;
+            opacity:0;
+            filter:alpha(opacity:0)
+        }
+        #level p {
+            font-size:50px;
+            text-align:center;
+            font-family:'黑体';
+            font-weight:bolder;
+            line-height:100px;
+            color:#fff;
+        }
+        #next {
+            cursor:pointer;
+            background:rgba(50,177,206,0.5);
+        }
+        #next:hover{
+            background:rgba(50,157,176,0.5);
+        }
+        /* 水滴 */
+        #bg .lit {
+            height: 90px;
+            width: 90px;
+            position: absolute;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="state">
+        <p>
+            <span id="txt"></span>
+        </p>
+        <div id="count">
+            <div id="value"></div>
+        </div>
+        <input type="button" value="简单" title="试试你的运气吧！" id="easy" style="color:red">
+        <input type="button" value="困难" title="实力挑战！" id="hand">
+    </div>
+    <div id="bg"></div>
+    <div id="mask" style="display: none; opacity: 0;"></div>
+    <div id="level">
+        <p id="lev"></p>
+        <p id="next"></p>
+    </div>
+    <script src="main.js"></script>
+    <script>
+        var oGame = new Game();
+        oGame.init();
+
+        var oNext = $('#next');
+        var mask = $('#mask');
+        var oBg = $('#bg');
+        var aImg = $('<img>',oBg);
+        var oLevel = $('#level');
+
+        oNext.onclick = function (){
+            init();
+        };
+
+        function init(){
+            oBg.innerHTML="";
+            setTimeout(function (){
+                var game = new Game();
+                game.init();
+                fnMove(oLevel,{opacity:0});
+                mask.style.display = 'none';
+                oLevel.style.display = 'none';
+            },1000)
+        }
+    </script>
+</body>
+</html>
